@@ -1,0 +1,1 @@
+print('Hello, I am the future data collection bot!')
