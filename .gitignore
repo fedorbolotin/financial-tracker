@@ -1,2 +1,9 @@
 # ignore all credentials files
 */credentials.json
+
+# ignore all jupyter notebooks
+.ipynb
+
+# ignore hidden files, except for gitignore
+.*
+!.gitignore
