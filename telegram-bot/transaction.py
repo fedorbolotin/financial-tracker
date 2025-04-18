@@ -8,11 +8,10 @@ class Transaction:
 
     def _parse_dttm_from_msg(self, msg):
         # TBD
-        return 1
+        return None
 
     def parse_from_message(self, msg):
         parsed = msg.split(sep = ' ')
-
         self.amount_lcy = parsed[0]
         self.currency_code = parsed[1]
         self.place = parsed[2]
