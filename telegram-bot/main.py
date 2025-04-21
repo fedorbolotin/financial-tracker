@@ -34,6 +34,7 @@ def get_credentials():
         return {
             'tg_bot_token': os.environ['TG_BOT_TOKEN'],
             'pg_user': os.environ['PG_USER'],
+            'pg_password': os.environ['PG_PASSWORD'],
             'pg_host': os.environ['PG_HOST'],
             'pg_database': os.environ['PG_DATABASE']
         }
@@ -56,7 +57,7 @@ class Postgres:
         self._url_object = URL.create(
                         'postgresql+psycopg2'
                         , username = self.cred['pg_user']
-                        , password = ''
+                        , password = self.cred['pg_password']
                         , host = self.cred['pg_host']
                         , database = self.cred['pg_database']
                     )

@@ -1,4 +1,13 @@
+# Core dependencies
 python-telegram-bot==20.7
+numpy==1.24.3
 pandas==2.0.3
 psycopg2-binary==2.9.9
-SQLAlchemy==2.0.23 
+SQLAlchemy==2.0.23
+
+# Date and time handling
+python-dateutil>=2.8.2
+pytz>=2023.3
+
+# Utility packages
+typing-extensions>=4.5.0 

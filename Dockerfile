@@ -6,7 +6,11 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     postgresql-client \
+    python3-dev \
     && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip and install wheel
+RUN pip install --no-cache-dir --upgrade pip wheel setuptools
 
 # Copy requirements first to leverage Docker cache
 COPY requirements.txt .
@@ -20,4 +24,4 @@ RUN useradd -m appuser
 USER appuser
 
 # Run the application
-CMD ["python", "telegram-bot/main.py"] 
+CMD ["python", "telegram-bot/main.py"]

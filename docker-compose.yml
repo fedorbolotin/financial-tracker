@@ -8,6 +8,7 @@ services:
       - TZ=UTC
       - TG_BOT_TOKEN=${TG_BOT_TOKEN}
       - PG_USER=${PG_USER:-postgres}
+      - PG_PASSWORD=${PG_PASSWORD:-postgres}
       - PG_HOST=${PG_HOST:-db}
       - PG_DATABASE=${PG_DATABASE:-financial_tracker}
     depends_on:
