@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    restart: always
+    environment:
+      - TZ=UTC
+      - TG_BOT_TOKEN=${TG_BOT_TOKEN}
+      - PG_USER=${PG_USER:-postgres}
+      - PG_HOST=${PG_HOST:-db}
+      - PG_DATABASE=${PG_DATABASE:-financial_tracker}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      - POSTGRES_USER=${PG_USER:-postgres}
+      - POSTGRES_PASSWORD=${PG_PASSWORD:-postgres}
+      - POSTGRES_DB=${PG_DATABASE:-financial_tracker}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init_tables.sql:/docker-entrypoint-initdb.d/init_tables.sql
+
+volumes:
+  postgres_data: 
