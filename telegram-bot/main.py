@@ -2,6 +2,7 @@ import json
 import uuid
 import datetime
 import logging
+import os
 import psycopg2 as pg
 import pandas as pd
 
@@ -26,9 +27,28 @@ logging.basicConfig(
     level = logging.INFO
 )
 
-cred_path = expanduser('~/Documents/Projects/financial-tracker/telegram-bot/credentials.json')
-with open(cred_path) as f:
-    cred = json.load(f)
+# Get credentials from environment variables or fall back to file
+def get_credentials():
+    # Try to get credentials from environment variables
+    if all(key in os.environ for key in ['TG_BOT_TOKEN', 'PG_USER', 'PG_HOST', 'PG_DATABASE']):
+        return {
+            'tg_bot_token': os.environ['TG_BOT_TOKEN'],
+            'pg_user': os.environ['PG_USER'],
+            'pg_host': os.environ['PG_HOST'],
+            'pg_database': os.environ['PG_DATABASE']
+        }
+    
+    # Fall back to file if environment variables are not set
+    cred_path = expanduser('~/Documents/Projects/financial-tracker/telegram-bot/credentials.json')
+    try:
+        with open(cred_path) as f:
+            return json.load(f)
+    except FileNotFoundError:
+        logging.error("Credentials file not found and environment variables not set")
+        raise
+
+# Get credentials
+cred = get_credentials()
 
 class Postgres:
     def __init__(self, credentials) -> None:
