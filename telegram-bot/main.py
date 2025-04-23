@@ -29,8 +29,9 @@ logging.basicConfig(
 
 # Get credentials from environment variables or fall back to file
 def get_credentials():
-    # Try to get credentials from environment variables
-    if all(key in os.environ for key in ['TG_BOT_TOKEN', 'PG_USER', 'PG_HOST', 'PG_DATABASE', 'PG_PASSWORD']):
+    required_keys = ['TG_BOT_TOKEN', 'PG_USER', 'PG_PASSWORD', 'PG_HOST', 'PG_DATABASE']
+
+    if all(key in os.environ for key in required_keys):
         return {
             'tg_bot_token': os.environ['TG_BOT_TOKEN'],
             'pg_user': os.environ['PG_USER'],
@@ -39,8 +40,12 @@ def get_credentials():
             'pg_database': os.environ['PG_DATABASE']
         }
     else: 
-        logging.error("Environment variables not set, available variables: %s", os.environ.keys())
-        raise
+        missing_vars = []
+        for var in required_keys:
+            if var not in os.environ:
+                missing_vars.append(var)
+        logging.error(f'Missing environment variables: {missing_vars}')
+        raise ValueError(f'Missing environment variables: {missing_vars}')
 
 # Get credentials
 cred = get_credentials()
