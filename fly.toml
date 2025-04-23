@@ -16,6 +16,12 @@ primary_region = 'ams'
   min_machines_running = 0
   processes = ['app']
 
+[env]
+  PG_USER = 'postgres'
+  PG_PASSWORD = 'postgres'
+  PG_HOST = 'db'
+  PG_DATABASE = 'financial_tracker'
+
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'
