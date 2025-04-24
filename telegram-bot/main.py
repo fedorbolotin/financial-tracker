@@ -278,15 +278,15 @@ async def handle_transaction(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
 if __name__ == '__main__':
 
-    defaults = Defaults(
-        block=False,
-        timeout=30
-    )
+    # defaults = Defaults(
+    #     block=False,
+    #     timeout=30
+    # )
 
     application = (
         ApplicationBuilder()
         .token(cred['tg_bot_token'])
-        .defaults(defaults)
+        # .defaults(defaults)
         .get_updates_read_timeout(42)
         .get_updates_write_timeout(42)
         .get_updates_connection_pool_size(1)
