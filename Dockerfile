@@ -23,5 +23,5 @@ COPY . .
 RUN useradd -m appuser
 USER appuser
 
-# Run the application
-CMD ["python", "telegram-bot/main.py"]
+# Run the application (new entrypoint under src)
+CMD ["python", "telegram-bot/src/main.py"]

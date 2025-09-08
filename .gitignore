@@ -37,8 +37,8 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Credentials
-telegram-bot/credentials.json
+# Credentials in all subdirectories
+*/**/credentials.json
 
 # ignore all jupyter notebooks
 *.ipynb
